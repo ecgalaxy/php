@@ -1,0 +1,22 @@
+---
+php_distribution_major_version: "{{ ansible_distribution_major_version }}"
+php_imported_gpg_keys:
+  - https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
+  - https://rpms.remirepo.net/RPM-GPG-KEY-remi
+  - https://rpms.remirepo.net/RPM-GPG-KEY-remi2018
+  - https://rpms.remirepo.net/RPM-GPG-KEY-remi2019
+  - https://rpms.remirepo.net/RPM-GPG-KEY-remi2020
+  - https://rpms.remirepo.net/RPM-GPG-KEY-remi2021
+  - https://rpms.remirepo.net/RPM-GPG-KEY-remi2022
+php_package_prefix: "php{{ php_version | replace('.', '') }}-php"
+php_installed_packages_extra:
+  - "{{ php_package_prefix }}-dbg"
+  - "{{ php_package_prefix }}-process"
+  - "{{ php_package_prefix }}-readline"
+  - "{{ php_package_prefix }}-pecl-apcu"
+  - "{{ php_package_prefix }}-pecl-igbinary"
+  - "{{ php_package_prefix }}-pecl-mongodb"
+  - "{{ php_package_prefix }}-pecl-redis"
+  - "{{ php_package_prefix }}-pecl-zip"
+
+php_xdebug_package: "{{ php_package_prefix }}-pecl-xdebug"

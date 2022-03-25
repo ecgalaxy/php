@@ -1,0 +1,14 @@
+---
+- name: Install APT requirements
+  ansible.builtin.package:
+    name:
+      - dirmngr
+    state: present
+  become: true
+
+- name: Enable APT repositories
+  ansible.builtin.apt_repository:
+    repo: "{{ item }}"
+    state: present
+  become: true
+  loop: "{{ php_enabled_apt_repos }}"

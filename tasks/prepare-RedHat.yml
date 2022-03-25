@@ -1,0 +1,13 @@
+---
+- name: Import Yum GPG keys
+  ansible.builtin.rpm_key:
+    key: "{{ item }}"
+    state: present
+  become: true
+  loop: "{{ php_imported_gpg_keys }}"
+
+- name: Enable Yum repositories
+  ansible.builtin.yum:
+    name: "{{ php_enabled_yum_repos }}"
+    state: present
+  become: true

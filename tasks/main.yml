@@ -1,0 +1,27 @@
+---
+- name: Include OS-specific variables
+  ansible.builtin.include_vars: "{{ ansible_os_family }}.yml"
+
+- name: Include OS-specific variables (Amazon Linux)
+  ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
+  when: ansible_distribution == 'Amazon'
+
+- name: Prepare
+  ansible.builtin.include_tasks: "prepare-{{ ansible_os_family }}.yml"
+
+- name: Install PHP packages
+  ansible.builtin.package:
+    name: "{{ php_installed_packages + php_installed_packages_extra }}"
+    state: present
+  become: true
+
+- name: Install OCI8
+  ansible.builtin.include_tasks: "oci8-{{ ansible_os_family }}.yml"
+  when: php_install_oci8_extension
+
+- name: Install Xdebug
+  ansible.builtin.package:
+    name: "{{ php_xdebug_package }}"
+    state: present
+  become: true
+  when: php_install_xdebug

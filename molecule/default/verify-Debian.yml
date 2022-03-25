@@ -1,0 +1,4 @@
+---
+- name: Check PHP version
+  ansible.builtin.shell: "php --version"
+  register: output

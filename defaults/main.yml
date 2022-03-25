@@ -1,0 +1,32 @@
+---
+php_version: "8.1"
+php_enabled_apt_repos:
+  - ppa:ondrej/php
+php_enabled_yum_repos:
+  - https://dl.fedoraproject.org/pub/epel/epel-release-latest-{{ php_distribution_major_version }}.noarch.rpm
+  - https://rpms.remirepo.net/enterprise/remi-release-{{ php_distribution_major_version }}.rpm
+php_installed_packages:
+  - "{{ php_package_prefix }}"
+  - "{{ php_package_prefix }}-bcmath"
+  - "{{ php_package_prefix }}-cli"
+  - "{{ php_package_prefix }}-common"
+  - "{{ php_package_prefix }}-curl"
+  - "{{ php_package_prefix }}-gd"
+  - "{{ php_package_prefix }}-gmp"
+  - "{{ php_package_prefix }}-intl"
+  - "{{ php_package_prefix }}-ldap"
+  - "{{ php_package_prefix }}-mbstring"
+  - "{{ php_package_prefix }}-mysqlnd"
+  - "{{ php_package_prefix }}-opcache"
+  - "{{ php_package_prefix }}-pdo"
+  - "{{ php_package_prefix }}-soap"
+  - "{{ php_package_prefix }}-sqlite3"
+  - "{{ php_package_prefix }}-xml"
+  - "{{ php_package_prefix }}-zip"
+
+php_install_xdebug: true
+
+# Requires ecgalaxy.oracle_instantclient, to be executed first (Ubuntu)
+php_install_oci8_extension: true
+php_oci8_extension_ini_path: "/etc/php/{{ php_version }}/mods-available/oci8.ini"
+php_oracle_instantclient_path: "/opt/oracle/instantclient"

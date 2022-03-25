@@ -1,0 +1,41 @@
+---
+- name: Set fact OCI8 version
+  ansible.builtin.set_fact:
+    php_oci8_version: "oci8"
+
+- name: Set fact OCI8 version
+  ansible.builtin.set_fact:
+    php_oci8_version: "oci8-2.2.0"
+  when: php_version[0] == "7"
+
+- name: Set fact OCI8 version
+  ansible.builtin.set_fact:
+    php_oci8_version: "oci8-3.0.1"
+  when: php_version[:2] == "8.0"
+
+- name: List installed extensions
+  ansible.builtin.command: "pecl list"
+  register: output
+  changed_when: false
+  become: true
+
+- name: Install OCI8 extension
+  ansible.builtin.shell: "set -o pipefail && printf 'instantclient,{{ php_oracle_instantclient_path }}' | pecl install {{ php_oci8_version }}"
+  args:
+    executable: /bin/bash
+  become: true
+  when: "'oci8' not in output.stdout"
+
+- name: Copy OCI8 ini file
+  ansible.builtin.copy:
+    src: oci8.ini
+    dest: "{{ php_oci8_extension_ini_path }}"
+    owner: root
+    group: root
+    mode: 'u=rw,go=r'
+  become: true
+
+- name: Enable OCI8 module - CLI
+  ansible.builtin.command: "phpenmod oci8"
+  changed_when: false
+  become: true

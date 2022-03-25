@@ -1,0 +1,8 @@
+---
+php_distribution_major_version: 7
+php_enabled_yum_repos:
+  - https://dl.fedoraproject.org/pub/epel/epel-release-latest-7.noarch.rpm
+  - https://rpms.remirepo.net/enterprise/remi-release-7.rpm
+php_imported_gpg_keys:
+  - https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-7
+  - https://rpms.remirepo.net/RPM-GPG-KEY-remi
