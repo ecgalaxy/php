@@ -3,15 +3,14 @@ php_enabled_apt_repos:
   - ppa:ondrej/php
 php_package_prefix: "php{{ php_version }}"
 php_installed_packages_extra:
+  - "{{ php_package_prefix }}-apcu"
   - "{{ php_package_prefix }}-bz2"
   - "{{ php_package_prefix }}-dev"
+  - "{{ php_package_prefix }}-igbinary"
+  - "{{ php_package_prefix }}-mongodb"
+  - "{{ php_package_prefix }}-msgpack"
   - "{{ php_package_prefix }}-phpdbg"
+  - "{{ php_package_prefix }}-redis"
   - "{{ php_package_prefix }}-zip"
-  - php-apcu
-  - php-igbinary
-  - php-mongodb
-  - php-msgpack
-  - php-pear
-  - php-redis
 
-php_xdebug_package: "php-xdebug"
+php_xdebug_package: "{{ php_package_prefix }}-xdebug"
