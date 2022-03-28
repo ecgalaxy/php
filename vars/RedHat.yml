@@ -17,6 +17,5 @@ php_installed_packages_extra:
   - "{{ php_package_prefix }}-pecl-igbinary"
   - "{{ php_package_prefix }}-pecl-mongodb"
   - "{{ php_package_prefix }}-pecl-redis"
-  - "{{ php_package_prefix }}-pecl-zip"
 
 php_xdebug_package: "{{ php_package_prefix }}-pecl-xdebug"

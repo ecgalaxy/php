@@ -11,6 +11,6 @@ php_installed_packages_extra:
   - "{{ php_package_prefix }}-msgpack"
   - "{{ php_package_prefix }}-phpdbg"
   - "{{ php_package_prefix }}-redis"
-  - "{{ php_package_prefix }}-zip"
+  - "php-pear"
 
 php_xdebug_package: "{{ php_package_prefix }}-xdebug"

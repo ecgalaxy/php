@@ -11,3 +11,9 @@
     name: "{{ php_enabled_yum_repos }}"
     state: present
   become: true
+
+- name: Install Yum PHP packages
+  ansible.builtin.yum:
+    name: "{{ php_installed_packages + php_installed_packages_extra }}"
+    state: present
+  become: true

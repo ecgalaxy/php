@@ -11,31 +11,44 @@
 - name: Set fact OCI8 version
   ansible.builtin.set_fact:
     php_oci8_version: "oci8-3.0.1"
-  when: php_version[:2] == "8.0"
+  when: php_version[:3] == "8.0"
 
-- name: List installed extensions
-  ansible.builtin.command: "pecl list"
-  register: output
-  changed_when: false
-  become: true
+- name: Check ini file
+  ansible.builtin.stat:
+    path: "{{ php_oci8_extension_ini_path }}"
+  register: php_oci8_ini_file
 
 - name: Install OCI8 extension
-  ansible.builtin.shell: "set -o pipefail && printf 'instantclient,{{ php_oracle_instantclient_path }}' | pecl install {{ php_oci8_version }}"
-  args:
-    executable: /bin/bash
-  become: true
-  when: "'oci8' not in output.stdout"
+  block:
+    - name: Install OCI8 extension with pecl
+      ansible.builtin.shell: "set -o pipefail && printf 'instantclient,{{ php_oracle_instantclient_path }}' | pecl -d php_suffix={{ php_version }} install {{ php_oci8_version }}"
+      args:
+        executable: /bin/bash
+      register: pecl_result
+      changed_when: "'install ok' in pecl_result.stdout"
+      failed_when: "'install ok' not in pecl_result.stdout"
 
-- name: Copy OCI8 ini file
-  ansible.builtin.copy:
-    src: oci8.ini
-    dest: "{{ php_oci8_extension_ini_path }}"
-    owner: root
-    group: root
-    mode: 'u=rw,go=r'
-  become: true
+    - name: Unregister OCI8 extension
+      ansible.builtin.shell: "set -o pipefail && pecl uninstall -r oci8"
+      args:
+        executable: /bin/bash
+      register: pecl_result
+      changed_when: "'uninstall ok' in pecl_result.stdout"
+      failed_when: "'uninstall ok' not in pecl_result.stdout"
 
-- name: Enable OCI8 module - CLI
-  ansible.builtin.command: "phpenmod oci8"
-  changed_when: false
+    - name: Copy OCI8 ini file
+      ansible.builtin.copy:
+        src: oci8.ini
+        dest: "{{ php_oci8_extension_ini_path }}"
+        owner: root
+        group: root
+        mode: 'u=rw,go=r'
+
+    - name: Enable OCI8 module - CLI
+      ansible.builtin.command: "phpenmod oci8"
+      register: cmd_result
+      changed_when: "cmd_result.rc == 0"
+      failed_when: "cmd_result.rc != 0"
+
   become: true
+  when: not php_oci8_ini_file.stat.exists

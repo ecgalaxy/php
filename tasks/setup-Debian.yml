@@ -12,3 +12,10 @@
     state: present
   become: true
   loop: "{{ php_enabled_apt_repos }}"
+
+- name: Install APT PHP packages
+  ansible.builtin.apt:
+    name: "{{ php_installed_packages + php_installed_packages_extra }}"
+    state: present
+    install_recommends: false
+  become: true
