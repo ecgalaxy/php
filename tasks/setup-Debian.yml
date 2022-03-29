@@ -3,6 +3,7 @@
   ansible.builtin.package:
     name:
       - dirmngr
+      - make
     state: present
   become: true
 
