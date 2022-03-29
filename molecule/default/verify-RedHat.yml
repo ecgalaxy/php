@@ -1,4 +1,8 @@
 ---
 - name: Check PHP version
   ansible.builtin.shell: "php{{ php_version | replace('.', '') }} --version"
-  register: output
+  register: output_version
+
+- name: Check PHP modules
+  ansible.builtin.shell: "php{{ php_version | replace('.', '') }} -m"
+  register: output_modules
