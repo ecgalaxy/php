@@ -8,11 +8,22 @@
   become: true
 
 - name: Enable APT repositories
-  ansible.builtin.apt_repository:
-    repo: "{{ item }}"
-    state: present
-  become: true
-  loop: "{{ php_enabled_apt_repos }}"
+  block:
+    - name: Enable APT repositories
+      ansible.builtin.apt_repository:
+        repo: "{{ item }}"
+        state: present
+      become: true
+      loop: "{{ php_enabled_apt_repos }}"
+
+  rescue:
+    - name: Enable APT repositories (rescue)
+      ansible.builtin.command: "add-apt-repository -y {{ item }}"
+      become: true
+      loop: "{{ php_enabled_apt_repos }}"
+      register: cmd_result
+      changed_when: "'Reading' in cmd_result.stdout"
+      failed_when: "'Reading' not in cmd_result.stdout"
 
 - name: Install APT PHP packages
   ansible.builtin.apt:
