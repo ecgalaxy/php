@@ -13,10 +13,15 @@
     php_oci8_version: "oci8-3.0.1"
   when: php_version[:3] == "8.0"
 
-- name: Check ini file
+- name: Register PHP extension directory
+  ansible.builtin.command: "php-config{{ php_version }} --extension-dir"
+  register: php_extension_dir
+  changed_when: false
+
+- name: Check shared object file
   ansible.builtin.stat:
-    path: "{{ php_oci8_extension_ini_path }}"
-  register: php_oci8_ini_file
+    path: "{{ php_extension_dir.stdout }}/oci8.so"
+  register: php_oci8_so_file
 
 - name: Install OCI8 extension
   block:
@@ -51,4 +56,4 @@
       failed_when: "cmd_result.rc != 0"
 
   become: true
-  when: not php_oci8_ini_file.stat.exists
+  when: not php_oci8_so_file.stat.exists
