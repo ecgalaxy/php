@@ -26,8 +26,24 @@
       failed_when: "'Reading' not in cmd_result.stdout"
 
 - name: Install APT PHP packages
-  ansible.builtin.apt:
-    name: "{{ php_installed_packages + php_installed_packages_extra }}"
-    state: present
-    install_recommends: false
-  become: true
+  block:
+    - name: Install APT PHP packages
+      ansible.builtin.apt:
+        name: "{{ php_installed_packages + php_installed_packages_extra }}"
+        state: present
+        install_recommends: false
+      become: true
+
+  rescue:
+    - name: Remove conflicting package (rescue)
+      ansible.builtin.apt:
+        name: libpcre2-dev
+        state: absent
+      become: true
+
+    - name: Install APT PHP packages (rescue)
+      ansible.builtin.apt:
+        name: "{{ php_installed_packages + php_installed_packages_extra }}"
+        state: present
+        install_recommends: false
+      become: true
