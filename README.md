@@ -26,7 +26,7 @@ See `defaults` and `vars` for the default values.
 Dependencies
 ------------
 
-* ecgalaxy.bootstrap
+* optional: ecgalaxy.bootstrap
 * ecgalaxy.common_packages
 * optional: ecgalaxy.oracle_instantclient
 
