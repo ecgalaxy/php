@@ -27,7 +27,7 @@ Dependencies
 ------------
 
 * optional: ecgalaxy.bootstrap
-* ecgalaxy.common_packages
+* optional: ecgalaxy.common_packages
 * optional: ecgalaxy.oracle_instantclient
 
 On Ubuntu, the `ecgalaxy.oracle_instantclient` role should be executed first if `php_install_oci8_extension` is set to `true`.

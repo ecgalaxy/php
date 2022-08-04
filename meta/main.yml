@@ -20,5 +20,4 @@ galaxy_info:
         - jammy
   galaxy_tags:
     - development
-dependencies:
-  - role: ecgalaxy.common_packages
+dependencies: []
