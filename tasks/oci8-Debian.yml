@@ -24,6 +24,8 @@
   register: php_oci8_so_file
 
 - name: Install OCI8 extension
+  when: not php_oci8_so_file.stat.exists
+  become: true
   block:
     - name: Install OCI8 extension with pecl
       ansible.builtin.shell: "set -o pipefail && printf 'instantclient,{{ php_oracle_instantclient_path }}' | pecl -d php_suffix={{ php_version }} install {{ php_oci8_version }}"
@@ -54,6 +56,3 @@
       register: cmd_result
       changed_when: "cmd_result.rc == 0"
       failed_when: "cmd_result.rc != 0"
-
-  become: true
-  when: not php_oci8_so_file.stat.exists
