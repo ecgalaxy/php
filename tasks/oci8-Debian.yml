@@ -1,10 +1,6 @@
 ---
 - name: Set fact OCI8 version
   ansible.builtin.set_fact:
-    php_oci8_version: "oci8"
-
-- name: Set fact OCI8 version
-  ansible.builtin.set_fact:
     php_oci8_version: "oci8-2.2.0"
   when: php_version[0] == "7"
 
@@ -12,6 +8,16 @@
   ansible.builtin.set_fact:
     php_oci8_version: "oci8-3.0.1"
   when: php_version[:3] == "8.0"
+
+- name: Set fact OCI8 version
+  ansible.builtin.set_fact:
+    php_oci8_version: "oci8-3.2.1"
+  when: php_version[:3] == "8.1"
+
+- name: Set fact OCI8 version
+  ansible.builtin.set_fact:
+    php_oci8_version: "oci8-3.3.0"
+  when: php_version[:3] == "8.2"
 
 - name: Register PHP extension directory
   ansible.builtin.command: "php-config{{ php_version }} --extension-dir"
