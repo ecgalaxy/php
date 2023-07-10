@@ -1,5 +1,9 @@
 # Releases
 
+## 1.0.x
+
+- Ubuntu 18.04 LTS support removed.
+
 ## 0.4.x
 
 - Remove role dependencies.
