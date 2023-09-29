@@ -17,6 +17,13 @@
       loop: "{{ php_enabled_apt_repos }}"
 
   rescue:
+    - name: Install APT requirements (rescue)
+      ansible.builtin.package:
+        name:
+          - software-properties-common
+        state: present
+      become: true
+
     - name: Enable APT repositories (rescue)
       ansible.builtin.command: "add-apt-repository -y {{ item }}"
       become: true
