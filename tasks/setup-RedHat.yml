@@ -10,6 +10,10 @@
   ansible.builtin.yum:
     name: "{{ php_enabled_yum_repos }}"
     state: present
+  register: result
+  until: result is succeeded
+  retries: 15
+  delay: 20
   become: true
 
 - name: Install Yum PHP packages
