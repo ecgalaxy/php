@@ -6,20 +6,8 @@
   tasks:
     - name: Include OS-specific tests
       include_tasks: "verify-{{ ansible_os_family }}.yml"
-
-    - name: Verify PHP version
-      ansible.builtin.assert:
-        that:
-          - "'PHP {{ php_version }}' in output_version.stdout"
-
-    - name: Assert Xdebug installed
-      ansible.builtin.assert:
-        that:
-          - "'Xdebug' in output_version.stdout"
-      when: php_install_xdebug
-
-    - name: Assert OCI8 installed
-      ansible.builtin.assert:
-        that:
-          - "'oci8' in output_modules.stdout"
-      when: php_install_oci8_extension
+      loop:
+        - "8.1"
+        - "8.2"
+      loop_control:
+        loop_var: version

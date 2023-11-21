@@ -1,8 +1,25 @@
 ---
-- name: Check PHP version
-  ansible.builtin.shell: "php{{ php_version | replace('.', '') }} --version"
+- name: "Check version - PHP {{ version }}"
+  ansible.builtin.shell: "php{{ version | replace('.', '') }} --version"
   register: output_version
 
-- name: Check PHP modules
-  ansible.builtin.shell: "php{{ php_version | replace('.', '') }} -m"
+- name: "Verify version - PHP {{ version }}"
+  ansible.builtin.assert:
+    that:
+      - "'PHP {{ version }}' in output_version.stdout"
+
+- name: "Check modules - PHP {{ version }}"
+  ansible.builtin.shell: "php{{ version | replace('.', '') }} -m"
   register: output_modules
+
+- name: "Assert Xdebug installed - PHP {{ version }}"
+  ansible.builtin.assert:
+    that:
+      - "'Xdebug' in output_version.stdout"
+  when: php_install_xdebug
+
+- name: "Assert OCI8 installed - PHP {{ version }}"
+  ansible.builtin.assert:
+    that:
+      - "'oci8' in output_modules.stdout"
+  when: php_install_oci8_extension

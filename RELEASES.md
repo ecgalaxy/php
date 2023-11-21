@@ -1,5 +1,10 @@
 # Releases
 
+## 1.1.x
+
+- RedHat 7, PHP 7.4 and PHP 8.0 support removed.
+- Role execution for those versions should still work but is not tested any more.
+
 ## 1.0.x
 
 - Ubuntu 18.04 LTS support removed.
