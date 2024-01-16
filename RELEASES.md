@@ -1,5 +1,10 @@
 # Releases
 
+## 1.2.x
+
+- Default version set to PHP 8.2.
+- PHP 8.3 support added (except on Amazon Linux 2).
+
 ## 1.1.x
 
 - RedHat 7, PHP 7.4 and PHP 8.0 support removed.

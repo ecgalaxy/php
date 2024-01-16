@@ -3,6 +3,10 @@ ECGALAXY php role
 
 This Ansible role installs PHP and extensions.
 
+Supported PHP versions: 8.1, 8.2 (default) and 8.3.
+
+PHP 8.3 is not supported on Amazon Linux 2.
+
 Requirements
 ------------
 
@@ -37,6 +41,8 @@ Example Playbook
 
     - hosts: all
       roles:
+        - ecgalaxy.bootstrap
+        - ecgalaxy.common_packages
         - ecgalaxy.oracle_instantclient
         - ecgalaxy.php
 

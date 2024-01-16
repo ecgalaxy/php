@@ -5,10 +5,9 @@
     - ../../defaults/main.yml
   tasks:
     - name: Include OS-specific tests
-      include_tasks: "verify-{{ ansible_os_family }}.yml"
+      include_tasks: "verify-Amazon.yml"
       loop:
         - "8.1"
         - "8.2"
-        - "8.3"
       loop_control:
         loop_var: version
