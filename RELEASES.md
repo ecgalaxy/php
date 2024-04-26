@@ -1,5 +1,10 @@
 # Releases
 
+## 1.3.x
+
+- Default version set to PHP 8.3.
+- PHP 8.3 support added on Amazon Linux 2.
+
 ## 1.2.x
 
 - Default version set to PHP 8.2.

@@ -3,9 +3,7 @@ ECGALAXY php role
 
 This Ansible role installs PHP and extensions.
 
-Supported PHP versions: 8.1, 8.2 (default) and 8.3.
-
-PHP 8.3 is not supported on Amazon Linux 2.
+Supported PHP versions: 8.1, 8.2 and 8.3 (default).
 
 Requirements
 ------------
@@ -45,6 +43,25 @@ Example Playbook
         - ecgalaxy.common_packages
         - ecgalaxy.oracle_instantclient
         - ecgalaxy.php
+
+One-liner
+---------
+
+To globally install the default PHP version:
+
+    bash <(curl -s https://code.europa.eu/-/snippets/1/raw/main/ansible-role.sh) ecgalaxy.php
+
+To globally install PHP 8.2:
+
+    bash <(curl -s https://code.europa.eu/-/snippets/1/raw/main/ansible-role.sh) ecgalaxy.php --extra-vars '{"php_version":"8.2"}'
+
+You may need to execute the `ecgalaxy.oracle_instantclient` first (Ubuntu):
+
+    bash <(curl -s https://code.europa.eu/-/snippets/1/raw/main/ansible-role.sh) ecgalaxy.oracle_instantclient
+
+See [ansible-role](https://code.europa.eu/-/snippets/1) for instructions.
+
+Please verify the script integrity first.
 
 License
 -------

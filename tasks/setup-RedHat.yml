@@ -16,8 +16,18 @@
   delay: 20
   become: true
 
-- name: Install Yum PHP packages
+- name: Install Yum PHP packages (RedHat)
   ansible.builtin.yum:
     name: "{{ php_installed_packages + php_installed_packages_extra }}"
     state: present
+  when: ansible_distribution != 'Amazon'
+  become: true
+
+- name: Install Yum PHP packages (Amazon)
+  ansible.builtin.yum:
+    name: "{{ php_installed_packages + php_installed_packages_extra }}"
+    state: present
+    disable_plugin:
+      - priorities
+  when: ansible_distribution == 'Amazon'
   become: true

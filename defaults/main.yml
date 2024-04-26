@@ -1,5 +1,5 @@
 ---
-php_version: "8.2"
+php_version: "8.3"
 php_enabled_apt_repos:
   - ppa:ondrej/php
 php_enabled_yum_repos:
