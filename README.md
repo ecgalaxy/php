@@ -32,7 +32,8 @@ Dependencies
 * optional: ecgalaxy.common_packages
 * optional: ecgalaxy.oracle_instantclient
 
-On Ubuntu, the `ecgalaxy.oracle_instantclient` role should be executed first if `php_install_oci8_extension` is set to `true`.
+On Amazon Linux 2 and Ubuntu, the `ecgalaxy.oracle_instantclient` role should be executed first
+if `php_install_oci8_extension` is set to `true`.
 
 Example Playbook
 ----------------
@@ -55,7 +56,7 @@ To globally install PHP 8.2:
 
     bash <(curl -s https://code.europa.eu/-/snippets/1/raw/main/ansible-role.sh) ecgalaxy.php --extra-vars '{"php_version":"8.2"}'
 
-You may need to execute the `ecgalaxy.oracle_instantclient` first (Ubuntu):
+You may need to execute the `ecgalaxy.oracle_instantclient` first (Amazon Linux 2, Ubuntu):
 
     bash <(curl -s https://code.europa.eu/-/snippets/1/raw/main/ansible-role.sh) ecgalaxy.oracle_instantclient
 

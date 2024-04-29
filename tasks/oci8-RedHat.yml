@@ -3,4 +3,14 @@
   ansible.builtin.package:
     name: "{{ php_package_prefix }}-oci8"
     state: present
+  when: ansible_distribution != 'Amazon'
+  become: true
+
+- name: Install OCI8 extension
+  ansible.builtin.package:
+    name: "{{ php_package_prefix }}-oci8"
+    state: present
+    disable_plugin:
+      - priorities
+  when: ansible_distribution == 'Amazon'
   become: true
