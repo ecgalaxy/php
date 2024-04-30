@@ -64,6 +64,24 @@ See [ansible-role](https://code.europa.eu/-/snippets/1) for instructions.
 
 Please verify the script integrity first.
 
+Using multiple PHP versions
+---------------------------
+
+Installing and using multiple PHP versions is supported by executing the role multiple times with different values of `php_version`.
+
+To switch to another version, use the `sudo update-alternatives` (Ubuntu) or `module load php<version>` (Amazon Linux, RedHat) command.
+
+For instance, to switch to PHP 8.2:
+
+On Ubuntu:
+
+    sudo update-alternatives --set php /usr/bin/php8.2
+
+On Amazon Linux, RedHat:
+
+    . /etc/profile.d/modules.sh
+    module load php82
+
 License
 -------
 
