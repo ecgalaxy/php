@@ -1,0 +1,14 @@
+---
+- name: Remove amazon-linux-extras PHP packages
+  ansible.builtin.yum:
+    name:
+      - "php-*.amzn2"
+      - "libzip-1*.amzn2*"
+    state: absent
+  become: true
+
+- name: Disable amazon-linux-extras PHP repositories
+  ansible.builtin.yum_repository:
+    name: "amzn2extra-php8.*"
+    state: absent
+  become: true

@@ -1,0 +1,15 @@
+---
+- name: Prepare
+  hosts: all
+  roles:
+    - role: ecgalaxy.bootstrap
+    - role: ecgalaxy.common_packages
+    - role: ecgalaxy.oracle_instantclient
+  tasks:
+    - name: Install amazon-linux-extras packages
+      ansible.builtin.command: amazon-linux-extras install php8.1
+  environment:
+    http_proxy: "{{ lookup('env', 'http_proxy') }}"
+    https_proxy: "{{ lookup('env', 'https_proxy') }}"
+    no_proxy: "{{ lookup('env', 'no_proxy') }}"
+  become: true

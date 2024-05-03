@@ -30,3 +30,6 @@ php_install_xdebug: true
 php_install_oci8_extension: true
 php_oci8_extension_ini_path: "/etc/php/{{ php_version }}/mods-available/oci8.ini"
 php_oracle_instantclient_path: "/opt/oracle/instantclient"
+
+# Remove amazon-linux-extras PHP packages and disable the topics (Amazon Linux 2)
+php_remove_al2_extras_packages: true

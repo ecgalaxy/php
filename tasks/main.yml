@@ -6,6 +6,10 @@
   ansible.builtin.include_vars: "{{ ansible_distribution }}.yml"
   when: ansible_distribution == 'Amazon'
 
+- name: Prepare environment (Amazon Linux)
+  ansible.builtin.include_tasks: "prepare-{{ ansible_distribution }}.yml"
+  when: ansible_distribution == 'Amazon' and php_remove_al2_extras_packages
+
 - name: "Setup - PHP {{ php_version }}"
   ansible.builtin.include_tasks: "setup-{{ ansible_os_family }}.yml"
 

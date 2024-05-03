@@ -1,10 +1,6 @@
 ---
 - name: Converge
   hosts: all
-  roles:
-    - ecgalaxy.bootstrap
-    - ecgalaxy.common_packages
-    - ecgalaxy.oracle_instantclient
   tasks:
     - name: Include php role
       ansible.builtin.include_role:

@@ -1,5 +1,9 @@
 # Releases
 
+## 1.4.x
+
+- The role removes amazon-linux-extras PHP packages by default (Amazon Linux 2).
+
 ## 1.3.x
 
 - Default version set to PHP 8.3.

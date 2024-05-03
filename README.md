@@ -22,6 +22,7 @@ Role Variables
 * `php_install_oci8_extension`: should the OCI8 extension be installed or not
 * `php_oci8_extension_ini_path`: where to store the OCI8 ini file (Ubuntu)
 * `php_oracle_instantclient_path`: Oracle Instant Client path
+* `php_remove_al2_extras_packages`: should amazon-linux-extras PHP packages be removed or not
 
 See `defaults` and `vars` for the default values.
 
