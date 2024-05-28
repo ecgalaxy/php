@@ -1,5 +1,9 @@
 # Releases
 
+## 1.5.x
+
+- Ubuntu 24.04 LTS support added.
+
 ## 1.4.x
 
 - The role removes amazon-linux-extras PHP packages by default (Amazon Linux 2).

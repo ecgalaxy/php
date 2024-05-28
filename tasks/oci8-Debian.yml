@@ -62,3 +62,19 @@
       register: cmd_result
       changed_when: "cmd_result.rc == 0"
       failed_when: "cmd_result.rc != 0"
+
+- name: Check libaio library
+  ansible.builtin.stat:
+    path: /usr/lib/x86_64-linux-gnu/libaio.so.1
+  register: libaio_so_file
+
+- name: Create libaio.so.1 symlink (Ubuntu 24.04)
+  ansible.builtin.file:
+    src: /usr/lib/x86_64-linux-gnu/libaio.so.1t64
+    dest: /usr/lib/x86_64-linux-gnu/libaio.so.1
+    owner: "root"
+    group: "root"
+    mode: "u=rw,go=r"
+    state: link
+  become: true
+  when: not libaio_so_file.stat.exists

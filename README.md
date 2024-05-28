@@ -34,7 +34,7 @@ Dependencies
 * optional: ecgalaxy.oracle_instantclient
 
 On Amazon Linux 2 and Ubuntu, the `ecgalaxy.oracle_instantclient` role should be executed first
-if `php_install_oci8_extension` is set to `true`.
+if `php_install_oci8_extension` is set to `true` (which is the default value).
 
 Example Playbook
 ----------------
