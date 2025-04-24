@@ -19,4 +19,5 @@ galaxy_info:
         - noble
   galaxy_tags:
     - development
+    - php
 dependencies: []

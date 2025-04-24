@@ -1,5 +1,9 @@
 # Releases
 
+## 1.6.x
+
+- PHP 8.4 support added (all distributions except Amazon Linux 2).
+
 ## 1.5.x
 
 - Ubuntu 24.04 LTS support added.
