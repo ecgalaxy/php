@@ -32,11 +32,21 @@
       changed_when: "'Reading' in cmd_result.stdout"
       failed_when: "'Reading' not in cmd_result.stdout"
 
+- name: Set fact excluded packages (default)
+  ansible.builtin.set_fact:
+    php_excluded_packages: []
+
+- name: Set fact excluded packages (PHP 8.5)
+  ansible.builtin.set_fact:
+    php_excluded_packages:
+      - "{{ php_package_prefix }}-opcache"
+  when: php_version[:3] == "8.5"
+
 - name: Install APT PHP packages
   block:
     - name: Install APT PHP packages
       ansible.builtin.apt:
-        name: "{{ php_installed_packages + php_installed_packages_extra }}"
+        name: "{{ (php_installed_packages + php_installed_packages_extra) | difference(php_excluded_packages) }}"
         state: present
         install_recommends: false
       become: true
@@ -50,7 +60,7 @@
 
     - name: Install APT PHP packages (rescue)
       ansible.builtin.apt:
-        name: "{{ php_installed_packages + php_installed_packages_extra }}"
+        name: "{{ (php_installed_packages + php_installed_packages_extra) | difference(php_excluded_packages) }}"
         state: present
         install_recommends: false
       become: true
